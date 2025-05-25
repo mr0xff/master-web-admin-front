@@ -35,7 +35,7 @@ export default function Login(){
         <Input 
           placeholder="Senha" 
           label="password" 
-          name="user"
+          name="pass"
           type="password"
         />
 

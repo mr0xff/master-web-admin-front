@@ -12,7 +12,6 @@ export default function ToastContainer(){
       pauseOnFocusLoss
       draggable
       pauseOnHover
-      theme="dark"
       transition={Bounce}
     />
   );
