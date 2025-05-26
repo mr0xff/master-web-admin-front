@@ -16,8 +16,8 @@ export default function Login(){
 
     loginMutation.mutate({ pass, user }, {
       onSuccess: (ev)=>{
-        toast.success(ev.data.message);
-        navigate("/cpanel");
+        toast.success(ev.data.message, { onClose: ()=> navigate("/cpanel")});
+        
       },
       onError: serverHttpError
     });  
