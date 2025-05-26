@@ -19,7 +19,7 @@ export default function Sidebar({ menus }: Props){
   }
 
   return (
-    <>
+    <div className='lg:basis-1/5'>
       {/* Toggle button on mobile */}
       <div className="md:hidden p-4 bg-white shadow flex justify-end">
         <button
@@ -46,30 +46,38 @@ export default function Sidebar({ menus }: Props){
             'translate-x-0': isOpen,
             '-translate-x-full': !isOpen,
             'md:translate-x-0 md:static md:block': true,
-          }
+          },
         )}
       >
-        <div className="p-4 text-2xl font-bold border-b border-gray-700">
-          Master Web
-        </div>
-        <nav className="flex flex-col p-4 gap-y-2">
-          {menus.map((props, index)=>(
-            <NavLink 
-              className={clsx("hover:bg-white/20 px-3 py-1 font-medium text-md rounded", { 
-                "bg-white/20": location.pathname === props.url  
-              })} 
-              key={index} 
-              to={props.url}
+        <div className='h-full flex flex-col'>
+          <div className="p-4 text-2xl font-bold border-b border-gray-700">
+            Master Web
+          </div>
+          <nav className="flex flex-col p-4 gap-y-2">
+            {menus.map((props, index)=>(
+              <NavLink 
+                className={clsx("hover:bg-white/20 px-3 py-1 font-medium text-md rounded", { 
+                  "bg-white/20": location.pathname === props.url  
+                })} 
+                key={index} 
+                to={props.url}
+              >
+                {props.title}
+              </NavLink>
+            ))}
+          </nav>
+          <div className='grow'>{" "}</div>
+          <div className="flex flex-col p-4 gap-y-2">
+            <button 
+              onClick={closeSession} 
+              className="hover:bg-red-500 bg-red-500/70 px-3 py-1 font-medium text-md rounded text-start"
             >
-              {props.title}
-            </NavLink>
-          ))}
-        </nav>
-        <footer className='absolute bottom-0 p-4 flex'>
-          <button onClick={closeSession} className="hover:bg-red-500 bg-red-500/25 px-3 py-1 font-medium text-md rounded">Sair</button>
-        </footer>
+              Sair
+            </button>
+          </div>
+        </div>
       </aside>
-    </>
+    </div>
   );
 };
 
