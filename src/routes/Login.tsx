@@ -5,6 +5,7 @@ import { authLogin } from "@/lib/api";
 import { toast } from "react-toastify";
 import { serverHttpError } from "@/lib/api";
 import { useNavigate } from "react-router";
+import { Storage } from "@/lib/utils";
 
 export default function Login(){
   const loginMutation = useMutation({ mutationFn: authLogin });
@@ -16,8 +17,10 @@ export default function Login(){
 
     loginMutation.mutate({ pass, user }, {
       onSuccess: (ev)=>{
-        toast.success(ev.data.message, { onClose: ()=> navigate("/cpanel")});
-        
+        toast.success(ev.data.message, { onClose: ()=>{
+          navigate("/cpanel");
+        }});
+        Storage.setKey(ev.data.token);
       },
       onError: serverHttpError
     });  

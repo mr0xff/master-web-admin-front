@@ -45,15 +45,29 @@ async function middlewareAuthedUser(){
   });
 }
 
+function clientTokenHandler(){
+  const token = Storage.getKey();
+  if(!token)
+    throw new Error("token not found");
+
+  return { headers: { "x-auth": token }};
+}
+
 async function logOut(){
   return new Promise((resolve)=>resolve(true)) // fake promise
   const key = Storage.getKey();
   return axios.delete('/auth/login', { headers: { "x-auth": key }});
 }
 
+async function getGroups(){
+  return instance.get('/user/group', clientTokenHandler())
+} 
+
 export {
   instance,
   authLogin,
   middlewareAuthedUser,
-  logOut
+  logOut,
+  getGroups,
+  clientTokenHandler
 }
