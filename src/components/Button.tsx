@@ -2,14 +2,14 @@ import { type PropsWithChildren } from "react";
 import clsx from "clsx";
 
 interface ButtonProps extends PropsWithChildren<React.ButtonHTMLAttributes<HTMLButtonElement>>{
-  kind?: "cancel"
+  kind?: "cancel",
 }
 
 export default function Button(props: ButtonProps){
   return(
     <button 
       {...props} 
-      className={clsx("bg-blue-500 text-white px-3 py-2")}
+      className={clsx("bg-blue-500 text-white px-3 py-2 hover:bg-blue-600 rounded", props.className)}
     >
       {props.children}
     </button>

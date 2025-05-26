@@ -1,6 +1,6 @@
 import Layout from "@/routes/dashboard/Layout";
 
-export default function Home() {
+export default function Users() {
   return(
     <Layout>
       test

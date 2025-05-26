@@ -6,7 +6,7 @@ export default function Input(props:InputProsp){
   return(
     <label>
       <p className="text-sm font-medium mb-2">{props.label}</p>
-      <input {...props} className="border px-3 py-2" />
+      <input {...props} className="border px-3 py-2 rounded" />
     </label>
   );
 }
