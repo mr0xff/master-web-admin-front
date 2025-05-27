@@ -8,21 +8,21 @@ import { useNavigate } from "react-router";
 import { Storage } from "@/lib/utils";
 
 export default function Login(){
-  const loginMutation = useMutation({ mutationFn: authLogin });
+  const { mutate, status, isIdle } = useMutation({ mutationFn: authLogin });
   const navigate = useNavigate();
 
   const postAction = (form: FormData)=>{
     const user = form.get("user") as string;
     const pass = form.get("pass") as string;
 
-    loginMutation.mutate({ pass, user }, {
+    mutate({ pass, user }, {
       onSuccess: (ev)=>{
         toast.success(ev.data.message, { onClose: ()=>{
           navigate("/cpanel");
         }});
         Storage.setKey(ev.data.token);
       },
-      onError: serverHttpError
+      onError: serverHttpError,
     });  
   }
 
@@ -42,7 +42,7 @@ export default function Login(){
           type="password"
         />
 
-        <Button>Entrar</Button>
+        <Button>{status === "pending" ?"Processando...":"Entrar"}</Button>
       </form>
     </main>
   )

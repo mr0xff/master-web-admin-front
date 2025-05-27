@@ -32,19 +32,6 @@ async function authLogin({ user, pass }:{ user: string; pass: string }){
   return instance.post<ServerResponse>('/auth/login', { username: user, password: pass });  
 }
 
-async function middlewareAuthedUser(){
-  const secretKey = localStorage.get('secret_key');
-
-  if(!secretKey)
-    throw new Error("Not found secret key");
-
-  return axios.get('/user/profile', {
-    headers: {
-      "x-auth": secretKey
-    }
-  });
-}
-
 function clientTokenHandler(){
   const token = Storage.getKey();
   if(!token)
@@ -53,21 +40,23 @@ function clientTokenHandler(){
   return { headers: { "x-auth": token }};
 }
 
-async function logOut(){
-  return new Promise((resolve)=>resolve(true)) // fake promise
-  const key = Storage.getKey();
-  return axios.delete('/auth/login', { headers: { "x-auth": key }});
-}
-
 async function getGroups(){
-  return instance.get('/user/group', clientTokenHandler())
+  return instance.get<{ 
+    _id: string; 
+    name: string 
+  }[]>('/user/group', clientTokenHandler()).then((res => res.data));
 } 
+
+async function createGroup({ name }: { name: string }){
+  return instance.post<ServerResponse>("/user/group", {
+    name: name
+  }, clientTokenHandler());
+}
 
 export {
   instance,
   authLogin,
-  middlewareAuthedUser,
-  logOut,
   getGroups,
-  clientTokenHandler
+  clientTokenHandler,
+  createGroup
 }
