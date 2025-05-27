@@ -41,7 +41,7 @@ export default function Sidebar({ menus }: Props){
       {/* Sidebar */}
       <aside
         className={clsx(
-          'fixed top-0 left-0 h-full w-64 bg-gray-800 text-white z-50 transform transition-transform duration-200 ease-in-out',
+          'fixed top-0 left-0 h-full w-64 bg-zinc-500 text-white z-50 transform transition-transform duration-200 ease-in-out',
           {
             'translate-x-0': isOpen,
             '-translate-x-full': !isOpen,

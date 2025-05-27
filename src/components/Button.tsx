@@ -9,7 +9,7 @@ export default function Button(props: ButtonProps){
   return(
     <button 
       {...props} 
-      className={clsx("bg-blue-500 text-white px-3 py-2 hover:bg-blue-600 rounded", props.className)}
+      className={clsx("bg-primary text-white px-3 py-1 hover:bg-primary/90 rounded font-medium", props.className)}
     >
       {props.children}
     </button>
