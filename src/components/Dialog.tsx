@@ -17,12 +17,11 @@ export default function Dialog({
   button,
   children,
   center,
-  action
+  action,
 }:DialogProps) {
   let [isOpen, setIsOpen] = useState(false)
   const open = () => setIsOpen(true);
   const close = () => setIsOpen(false);
-  const actionRef = useRef<HTMLFormElement>(null);
 
   return (
     <>
@@ -45,9 +44,7 @@ export default function Dialog({
               <p className="mt-2 text-sm/6">
                 {description}
               </p>
-              <form ref={actionRef} onSubmit={e => e.preventDefault()} {...action}  className={clsx({ "flex w-full": center})}>
-                {children}
-              </form>
+              {children}
               <div className="mt-4 flex gap-x-3">
                 <Button
                   onClick={close}
@@ -55,7 +52,7 @@ export default function Dialog({
                 >
                   Fechar
                 </Button>
-                {!!children && <Button onClick={()=>actionRef.current?.submit()}>Enviar</Button>}
+                {!!children && <Button onClick={()=>{}}>Enviar</Button>}
               </div>
             </DialogPanel>
           </div>

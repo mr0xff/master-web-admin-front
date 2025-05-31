@@ -38,7 +38,7 @@ export default function UserGroups(){
           center
           action={action}
         >
-          <div className="w-full flex flex-col">
+          <form className="w-full flex flex-col">
             <Input
               label="Módulo" 
               placeholder="Nome do Modulo" 
@@ -52,7 +52,7 @@ export default function UserGroups(){
               className="w-full"
               name="description"
             />
-          </div>
+          </form>
         </Dialog>
 
         <div className="grid grid-cols-2 gap-x-3">
